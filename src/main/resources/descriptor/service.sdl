@@ -4,8 +4,8 @@
   "description" : "facebook开源的大数据分布式SQL查询引擎.",
   "version" : "${project.version}",
   "runAs" : {
-    "user" : "presto",
-    "group" : "presto"
+    "user" : "root",
+    "group" : "root"
   },
   "parcel" : {
     "requiredTags" : [ "presto" ]
