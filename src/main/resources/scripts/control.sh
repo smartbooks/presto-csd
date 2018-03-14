@@ -56,7 +56,7 @@ ARGS=()
 case $CMD in
 
   (start_corrdinator)
-    log "Startitng Presto Coordinator"
+    log "启动 Presto Coordinator"
     link_files
     generate_jvm_config
     copy_hdfs_config
@@ -68,7 +68,7 @@ case $CMD in
     ;;
 
   (start_discovery)
-    log "Startitng Presto Discovery"
+    log "启动 Presto Discovery"
     link_files
     generate_jvm_config
     copy_hdfs_config
@@ -80,7 +80,7 @@ case $CMD in
     ;;
 
   (start_worker)
-    log "Startitng Presto Worker"
+    log "启动 Presto Worker"
     link_files
     generate_jvm_config
     copy_hdfs_config
