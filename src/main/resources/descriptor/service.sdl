@@ -1,7 +1,7 @@
 {
   "name" : "PRESTO",
   "label" : "Presto",
-  "description" : "Distributed SQL Query Engine for Big Data",
+  "description" : "facebook开源的大数据分布式SQL查询引擎.",
   "version" : "${project.version}",
   "runAs" : {
     "user" : "presto",
@@ -25,24 +25,24 @@
   "commands" : [
     {
       "name" : "PrestoInitializeCoordinatorNodePropertiesCommand",
-      "label" : "Initialize node.properties",
-      "description" : "Initialize node.properties file.",
+      "label" : "初始化 Coordinator node.properties",
+      "description" : "初始化 Coordinator node.properties",
       "roleName" : "PRESTO_COORDINATOR",
       "roleCommand" : "coord_init",
       "runMode" : "all"
     },
     {
       "name" : "PrestoInitializeDiscoveryNodePropertiesCommand",
-      "label" : "Initialize node.properties",
-      "description" : "Initialize node.properties file.",
+      "label" : "初始化 Discovery node.properties",
+      "description" : "初始化 Discovery node.properties",
       "roleName" : "PRESTO_DISCOVERY",
       "roleCommand" : "discovery_init",
       "runMode" : "all"
     },
     {
       "name" : "PrestoInitializeWorkerNodePropertiesCommand",
-      "label" : "Initialize node.properties",
-      "description" : "Initialize node.properties file.",
+      "label" : "初始化 Worker node.properties",
+      "description" : "初始化 Worker node.properties",
       "roleName" : "PRESTO_WORKER",
       "roleCommand" : "worker_init",
       "runMode" : "all"
@@ -64,17 +64,17 @@
   "parameters" : [
     {
       "name" : "discovery_uri",
-      "label" : "discovery uri",
-      "description" : "discovery uri",
+      "label" : "Discovery Uri",
+      "description" : "Discovery管理界面地址",
       "configName" : "discovery.uri",
       "required" : "true",
       "type" : "uri",
-      "default" : "http://localhost:8080"
+      "default" : "http://localhost:8081"
     },
     {
       "name" : "hive_metastore_uri",
       "label" : "hive.metastore.uri",
-      "description" : "hive.metastore.uri",
+      "description" : "Hive MetaStore元数据服务地址",
       "configName" : "hive.metastore.uri",
       "required" : "true",
       "type" : "uri",
@@ -83,7 +83,7 @@
     {
       "name" : "mysql_connection_host",
       "label" : "mysql.connection-url",
-      "description" : "mysql host",
+      "description" : "Mysql主机地址",
       "configName" : "mysql.connection.host",
       "required" : "true",
       "type" : "string",
@@ -92,7 +92,7 @@
     {
       "name" : "mysql_connection_port",
       "label" : "mysql.connection-port",
-      "description" : "mysql prot",
+      "description" : "Mysql主机端口",
       "configName" : "mysql.connection.port",
       "required" : "true",
       "type" : "port",
@@ -101,25 +101,25 @@
     {
       "name" : "mysql_connection_user",
       "label" : "mysql.connection-user",
-      "description" : "mysql.connection-user",
+      "description" : "Mysql访问口令",
       "configName" : "connection-user",
       "required" : "true",
       "type" : "string",
-      "default" : "mysql-user"
+      "default" : "root"
     },
     {
       "name" : "mysql_connection_password",
       "label" : "mysql.connection-password",
-      "description" : "mysql.connection-password",
+      "description" : "Mysql访问密码",
       "configName" : "connection-password",
       "required" : "true",
       "type" : "password",
-      "default" : "password"
+      "default" : "root"
     },
     {
       "name" : "kafka_nodes",
       "label" : "kafka.nodes",
-      "description" : "kafka.nodes",
+      "description" : "kafka节点列表,多个主机格式host1:port,host2:port",
       "configName" : "kafka.nodes",
       "required" : "true",
       "type" : "string",
@@ -128,7 +128,7 @@
     {
       "name" : "kafka_table_names",
       "label" : "kafka.table-names",
-      "description" : "kafka.table-names",
+      "description" : "kafka表名称列表,多个表格式:table1,table2",
       "configName" : "kafka.table-names",
       "required" : "true",
       "type" : "string",
@@ -167,7 +167,7 @@
       ],
       "externalLink" : {
        "name" : "coordinator_web_ui",
-       "label" : "Coordinator Web UI",
+       "label" : "Coordinator管理界面地址",
        "url" : "http://${host}:${coordinator_webui_port}"
       },
       "topology" : { "minInstances" : 1 },
@@ -175,7 +175,7 @@
         {
           "name" : "coordinator_webui_port",
           "label" : "Coordinator Port",
-          "description" : "The port of the coordinator",
+          "description" : "Coordinator服务监听端口",
           "configName" : "http-server.http.port",
           "required" : "true",
           "type" : "port",
@@ -183,8 +183,8 @@
         },
         {
           "name" : "task_max_memory",
-          "label" : "task",
-          "description" : "task.max-memory",
+          "label" : "Task Max Memory",
+          "description" : "一个单独的任务使用的最大内存 (一个查询计划的某个执行部分会在一个特定的节点上执行)。 这个配置参数限制的GROUP BY语句中的Group的数目、JOIN关联中的右关联表的大小、ORDER BY语句中的行数和一个窗口函数中处理的行数。 该参数应该根据并发查询的数量和查询的复杂度进行调整。如果该参数设置的太低，很多查询将不能执行；但是如果设置的太高将会导致JVM把内存耗光。",
           "configName" : "task.max-memory",
           "required" : "true",
           "type" : "memory",
@@ -194,7 +194,7 @@
         {
           "name" : "jvm_config",
           "label" : "jvm_config",
-          "description" : "jvm_config",
+          "description" : "JVM配置包含一系列在启动JVM的时候需要使用的命令行选项.",
           "configName" : "jvm.config",
           "required" : "true",
           "type" : "string_array",
@@ -236,11 +236,11 @@
             "additionalConfigs" : [
               {
                 "key" : "connector.name",
-                "value" : "hive-cdh5"
+                "value" : "hive-hadoop2"
               },
               {
                 "key" : "hive.config.resources",
-                "value" : "etc/catalog/core-site.xml,etc/catalog/hdfs-site.xml"
+                "value" : "/etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml"
               }
             ]
           },
@@ -273,6 +273,14 @@
               {
                 "key" : "connection-url",
                 "value" : "jdbc:mysql://${mysql_connection_host}:${mysql_connection_port}"
+              },
+              {
+                "key" : "connection-user",
+                "value" : "${mysql_connection_user}"
+              },
+              {
+                "key" : "connection-password",
+                "value" : "${mysql_connection_password}"
               }
             ]
           },
@@ -310,8 +318,8 @@
       "commands" : [
         {
           "name" : "worker_init",
-          "label" : "Initialize node.properties.",
-          "description" : "Initialize node.properties.",
+          "label" : "初始化 Worker node.properties.",
+          "description" : "初始化 Worker node.properties.",
           "expectedExitCodes" : [0],
           "requiredRoleState" : "stopped",
           "commandRunner" : {
@@ -324,7 +332,7 @@
       ],
       "externalLink" : {
        "name" : "worker_web_ui",
-       "label" : "Worker Web UI",
+       "label" : "Worker管理界面地址",
        "url" : "http://${host}:${worker_webui_port}"
       },
       "topology" : { "minInstances" : 1 },
@@ -332,16 +340,16 @@
         {
           "name" : "worker_webui_port",
           "label" : "Worker Port",
-          "description" : "The port of the worker",
+          "description" : "Worker节点监听端口",
           "configName" : "http-server.http.port",
           "required" : "true",
           "type" : "port",
-          "default" : 8080
+          "default" : 8082
         },
         {
           "name" : "task_max_memory",
-          "label" : "task",
-          "description" : "task.max-memory",
+          "label" : "Task Max Memory",
+          "description" : "一个单独的任务使用的最大内存 (一个查询计划的某个执行部分会在一个特定的节点上执行)。 这个配置参数限制的GROUP BY语句中的Group的数目、JOIN关联中的右关联表的大小、ORDER BY语句中的行数和一个窗口函数中处理的行数。 该参数应该根据并发查询的数量和查询的复杂度进行调整。如果该参数设置的太低，很多查询将不能执行；但是如果设置的太高将会导致JVM把内存耗光。",
           "configName" : "task.max-memory",
           "required" : "true",
           "type" : "memory",
@@ -351,7 +359,7 @@
         {
           "name" : "jvm_config",
           "label" : "jvm_config",
-          "description" : "jvm_config",
+          "description" : "JVM配置文件,包含一系列在启动JVM的时候需要使用的命令行选项",
           "configName" : "jvm.config",
           "required" : "true",
           "type" : "string_array",
@@ -389,11 +397,11 @@
             "additionalConfigs" : [
               {
                 "key" : "connector.name",
-                "value" : "hive-cdh5"
+                "value" : "hive-hadoop2"
               },
               {
                 "key" : "hive.config.resources",
-                "value" : "etc/catalog/core-site.xml,etc/catalog/hdfs-site.xml"
+                "value" : "/etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml"
               }
             ]
           },
@@ -426,6 +434,14 @@
               {
                 "key" : "connection-url",
                 "value" : "jdbc:mysql://${mysql_connection_host}:${mysql_connection_port}"
+              },
+              {
+                "key" : "connection-user",
+                "value" : "${mysql_connection_user}"
+              },
+              {
+                "key" : "connection-password",
+                "value" : "${mysql_connection_password}"
               }
             ]
           },
@@ -463,8 +479,8 @@
       "commands" : [
         {
           "name" : "discovery_init",
-          "label" : "Initialize node.properties.",
-          "description" : "Initialize node.properties.",
+          "label" : "初始化 Discovery node.properties.",
+          "description" : "初始化 Discovery node.properties.",
           "expectedExitCodes" : [0],
           "requiredRoleState" : "stopped",
           "commandRunner" : {
@@ -477,7 +493,7 @@
       ],
       "externalLink" : {
        "name" : "discovery_web_ui",
-       "label" : "Discovery Web UI",
+       "label" : "Discovery管理界面地址",
        "url" : "http://${host}:${discovery_webui_port}"
       },
       "topology" : { "minInstances" : 1, "maxInstances" : 1 },
@@ -485,16 +501,16 @@
         {
           "name" : "discovery_webui_port",
           "label" : "Discovery Port",
-          "description" : "The port of the worker",
+          "description" : "Discovery服务监听端口",
           "configName" : "http-server.http.port",
           "required" : "true",
           "type" : "port",
-          "default" : 8080
+          "default" : 8081
         },
         {
           "name" : "task_max_memory",
           "label" : "task",
-          "description" : "task.max-memory",
+          "description" : "最大使用内存",
           "configName" : "task.max-memory",
           "required" : "true",
           "type" : "memory",
@@ -550,11 +566,11 @@
             "additionalConfigs" : [
               {
                 "key" : "connector.name",
-                "value" : "hive-cdh5"
+                "value" : "hive-hadoop2"
               },
               {
                 "key" : "hive.config.resources",
-                "value" : "etc/catalog/core-site.xml,etc/catalog/hdfs-site.xml"
+                "value" : "/etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml"
               }
             ]
           },
@@ -587,6 +603,14 @@
               {
                 "key" : "connection-url",
                 "value" : "jdbc:mysql://${mysql_connection_host}:${mysql_connection_port}"
+              },
+              {
+                "key" : "connection-user",
+                "value" : "${mysql_connection_user}"
+              },
+              {
+                "key" : "connection-password",
+                "value" : "${mysql_connection_password}"
               }
             ]
           },
