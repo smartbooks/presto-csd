@@ -57,7 +57,7 @@
       "configName" : "discovery.uri",
       "required" : "true",
       "type" : "uri",
-      "default" : "http://localhost:8081"
+      "default" : "http://localhost:8080"
     }
   ],
   "rolesWithExternalLinks" : ["PRESTO_COORDINATOR", "PRESTO_DISCOVERY", "PRESTO_WORKER"],
@@ -116,10 +116,11 @@
             "filename" : "etc/coordinator.config.properties",
 			"refreshable" : true,
             "configFormat" : "properties",
-            "includedParams" : ["coordinator_webui_port"],
+            "includedParams" : ["discovery_uri","coordinator_webui_port"],
 			"excludedParams" : [],
             "additionalConfigs" : [
               { "key" : "coordinator", "value" : "true" },
+			  { "key" : "discovery-server.enabled", "value" : "true" },
               { "key" : "node-scheduler.include-coordinator", "value" : "false"}
             ]
           },
@@ -216,7 +217,6 @@
             "includedParams" : ["discovery_uri","worker_webui_port"],
             "excludedParams" : [],
             "additionalConfigs" : [
-			  { "key" : "task.max-memory", "value" : "1GB" },
               { "key" : "coordinator", "value" : "false" }
             ]
           },
@@ -297,7 +297,8 @@
             "includedParams" : ["discovery_uri", "discovery_webui_port"],
             "excludedParams" : [],
 			"additionalConfigs" : [
-			  { "key" : "task.max-memory", "value" : "1GB" }
+              { "key" : "coordinator", "value" : "false" },
+			  { "key" : "node-scheduler.include-coordinator", "value" : "true"}
             ]
           },
 		  {
