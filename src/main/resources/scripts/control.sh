@@ -96,6 +96,9 @@ case $CMD in
    
   (stop_discovery)
     log "Stop Presto Discovery"
+	link_files
+    generate_jvm_config
+    copy_hdfs_config
     ARGS=("--config")
     ARGS+=("$CONF_DIR/$CMD_CONF")
     ARGS+=("--data-dir")
@@ -117,6 +120,9 @@ case $CMD in
   
   (stop_worker)
     log "Stop Presto Worker"
+	link_files
+    generate_jvm_config
+    copy_hdfs_config
     ARGS=("--config")
     ARGS+=("$CONF_DIR/$CMD_CONF")
     ARGS+=("--data-dir")
