@@ -13,14 +13,8 @@
   "inExpressWizard" : false,
   "icon" : "images/icon.png",
   "serviceDependencies" : [
-    {
-      "name" : "HIVE",
-      "required" : "false"
-    },
-    {
-      "name" : "KAFKA",
-      "required" : "false"
-    }
+    { "name" : "HIVE", "required" : "false" },
+    { "name" : "KAFKA", "required" : "false" }
   ],
   "commands" : [
     {
@@ -50,19 +44,13 @@
   ],
   "serviceInit" : {
     "preStartSteps" : [
-      {
-        "commandName" : "PrestoInitializeCoordinatorNodePropertiesCommand"
-      },
-      {
-        "commandName" : "PrestoInitializeDiscoveryNodePropertiesCommand"
-      },
-      {
-        "commandName" : "PrestoInitializeWorkerNodePropertiesCommand"
-      }
+      { "commandName" : "PrestoInitializeCoordinatorNodePropertiesCommand" },
+      { "commandName" : "PrestoInitializeDiscoveryNodePropertiesCommand" },
+      { "commandName" : "PrestoInitializeWorkerNodePropertiesCommand" }
     ]
   },
   "parameters" : [
-    {
+	{
       "name" : "discovery_uri",
       "label" : "Discovery Uri",
       "description" : "Discovery管理界面地址",
@@ -70,69 +58,6 @@
       "required" : "true",
       "type" : "uri",
       "default" : "http://localhost:8081"
-    },
-    {
-      "name" : "hive_metastore_uri",
-      "label" : "hive.metastore.uri",
-      "description" : "Hive MetaStore元数据服务地址",
-      "configName" : "hive.metastore.uri",
-      "required" : "true",
-      "type" : "uri",
-      "default" : "thrift://localhost:9083"
-    },
-    {
-      "name" : "mysql_connection_host",
-      "label" : "mysql.connection-url",
-      "description" : "Mysql主机地址",
-      "configName" : "mysql.connection.host",
-      "required" : "true",
-      "type" : "string",
-      "default" : "localhost"
-    },
-    {
-      "name" : "mysql_connection_port",
-      "label" : "mysql.connection-port",
-      "description" : "Mysql主机端口",
-      "configName" : "mysql.connection.port",
-      "required" : "true",
-      "type" : "port",
-      "default" : "3306"
-    },
-    {
-      "name" : "mysql_connection_user",
-      "label" : "mysql.connection-user",
-      "description" : "Mysql访问口令",
-      "configName" : "connection-user",
-      "required" : "true",
-      "type" : "string",
-      "default" : "root"
-    },
-    {
-      "name" : "mysql_connection_password",
-      "label" : "mysql.connection-password",
-      "description" : "Mysql访问密码",
-      "configName" : "connection-password",
-      "required" : "true",
-      "type" : "password",
-      "default" : "root"
-    },
-    {
-      "name" : "kafka_nodes",
-      "label" : "kafka.nodes",
-      "description" : "kafka节点列表,多个主机格式host1:port,host2:port",
-      "configName" : "kafka.nodes",
-      "required" : "true",
-      "type" : "string",
-      "default" : "localhost:9092"
-    },
-    {
-      "name" : "kafka_table_names",
-      "label" : "kafka.table-names",
-      "description" : "kafka表名称列表,多个表格式:table1,table2",
-      "configName" : "kafka.table-names",
-      "required" : "true",
-      "type" : "string",
-      "default" : ""
     }
   ],
   "rolesWithExternalLinks" : ["PRESTO_COORDINATOR", "PRESTO_DISCOVERY", "PRESTO_WORKER"],
@@ -170,120 +95,61 @@
       ],
       "externalLink" : {
        "name" : "coordinator_web_ui",
-       "label" : "Coordinator管理界面地址",
+       "label" : "Coordinator Web UI",
        "url" : "http://${host}:${coordinator_webui_port}"
       },
       "topology" : { "minInstances" : 1, "maxInstances" : 1},
       "parameters" : [
-        {
-          "name" : "coordinator_webui_port",
-          "label" : "Coordinator Port",
-          "description" : "Coordinator服务监听端口",
-          "configName" : "http-server.http.port",
-          "required" : "true",
-          "type" : "port",
-          "default" : 8080
-        },
-        {
-          "name" : "task_max_memory",
-          "label" : "Task Max Memory",
-          "description" : "一个单独的任务使用的最大内存 (一个查询计划的某个执行部分会在一个特定的节点上执行)。 这个配置参数限制的GROUP BY语句中的Group的数目、JOIN关联中的右关联表的大小、ORDER BY语句中的行数和一个窗口函数中处理的行数。 该参数应该根据并发查询的数量和查询的复杂度进行调整。如果该参数设置的太低，很多查询将不能执行；但是如果设置的太高将会导致JVM把内存耗光。",
-          "configName" : "task.max-memory",
-          "required" : "true",
-          "type" : "memory",
-          "unit" : "bytes",
-          "default" : 1073741824
-        },
-        {
-          "name" : "jvm_config",
-          "label" : "jvm_config",
-          "description" : "JVM配置包含一系列在启动JVM的时候需要使用的命令行选项.",
-		  "configName" : "",
-          "required" : "true",
-          "type" : "string_array",
-          "separator" : "\n",
-          "default" : [
-            "-server",
-            "-Xmx16G",
-            "-XX:+UseConcMarkSweepGC",
-            "-XX:+ExplicitGCInvokesConcurrent",
-            "-XX:+AggressiveOpts",
-            "-XX:+HeapDumpOnOutOfMemoryError",
-            "-XX:OnOutOfMemoryError=kill -9 %p"
-          ]
-        }
-      ],
+		{
+			"name" : "coordinator_webui_port",
+			"label" : "Coordinator Port",
+			"description" : "Coordinator服务监听端口",
+			"configName" : "http-server.http.port",
+			"required" : "true",
+			"type" : "port",
+			"default" : 8080
+		}
+	  ],
       "configWriter" : {
         "generators" : [
+          {
+            "filename" : "etc/coordinator.config.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : ["coordinator_webui_port"],
+			"excludedParams" : [],
+            "additionalConfigs" : [
+              { "key" : "coordinator", "value" : "true" },
+              { "key" : "node-scheduler.include-coordinator", "value" : "false"}
+            ]
+          },
 		  {
             "filename" : "etc/jvm.config",
+			"refreshable" : true,
             "configFormat" : "gflags",
-			"includedParams" : ["jvm_config"],
+			"includedParams" : [],
 			"excludedParams" : []
           },
           {
-            "filename" : "etc/coordinator.config.properties",
-            "configFormat" : "properties",
-            "includedParams" : ["discovery_uri", "coordinator_webui_port"],
-            "excludedParams" : ["jvm_config"],
-            "additionalConfigs" : [
-              {
-                "key" : "coordinator",
-                "value" : "true"
-              },
-              {
-                "key" : "node-scheduler.include-coordinator",
-                "value" : "false"
-              }
-            ]
-          },
-          {
             "filename" : "etc/catalog/hive.properties",
+			"refreshable" : true,
             "configFormat" : "properties",
-            "includedParams" : ["hive_metastore_uri"],
-            "excludedParams" : ["jvm_config"],
-            "additionalConfigs" : [
-              {
-                "key" : "connector.name",
-                "value" : "hive-hadoop2"
-              },
-              {
-                "key" : "hive.config.resources",
-                "value" : "/etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml"
-              }
-            ]
+            "includedParams" : [],
+			"excludedParams" : []
           },
           {
             "filename" : "etc/catalog/kafka.properties",
+			"refreshable" : true,
             "configFormat" : "properties",
-            "includedParams" : ["kafka_nodes", "kafka_table_names"],
-            "excludedParams" : ["jvm_config"],
-            "additionalConfigs" : [
-              {
-                "key" : "connector.name",
-                "value" : "kafka"
-              },
-              {
-                "key" : "kafka.hide-internal-columns",
-                "value" : "false"
-              }
-            ]
+            "includedParams" : [],
+			"excludedParams" : []
           },
           {
             "filename" : "etc/catalog/mysql.properties",
+			"refreshable" : true,
             "configFormat" : "properties",
-            "includedParams" : ["mysql_connection_user", "mysql_connection_password"],
-            "excludedParams" : ["jvm_config", "mysql_connection_host", "mysql_connection_port"],
-            "additionalConfigs" : [
-              {
-                "key" : "connector.name",
-                "value" : "mysql"
-              },
-              {
-                "key" : "connection-url",
-                "value" : "jdbc:mysql://${mysql_connection_host}:${mysql_connection_port}"
-              }
-            ]
+            "includedParams" : [],
+            "excludedParams" : []
           }
         ]
       }
@@ -321,116 +187,56 @@
       ],
       "externalLink" : {
        "name" : "worker_web_ui",
-       "label" : "Worker管理界面地址",
+       "label" : "Worker Web UI",
        "url" : "http://${host}:${worker_webui_port}"
       },
       "topology" : { "minInstances" : 1 },
-      "parameters" : [
-        {
-          "name" : "worker_webui_port",
-          "label" : "Worker Port",
-          "description" : "Worker节点监听端口",
-          "configName" : "http-server.http.port",
-          "required" : "true",
-          "type" : "port",
-          "default" : 8082
-        },
-        {
-          "name" : "task_max_memory",
-          "label" : "Task Max Memory",
-          "description" : "一个单独的任务使用的最大内存 (一个查询计划的某个执行部分会在一个特定的节点上执行)。 这个配置参数限制的GROUP BY语句中的Group的数目、JOIN关联中的右关联表的大小、ORDER BY语句中的行数和一个窗口函数中处理的行数。 该参数应该根据并发查询的数量和查询的复杂度进行调整。如果该参数设置的太低，很多查询将不能执行；但是如果设置的太高将会导致JVM把内存耗光。",
-          "configName" : "task.max-memory",
-          "required" : "true",
-          "type" : "memory",
-          "unit" : "bytes",
-          "default" : 1073741824
-        },
-        {
-          "name" : "jvm_config",
-          "label" : "jvm_config",
-          "description" : "JVM配置文件,包含一系列在启动JVM的时候需要使用的命令行选项",
-          "configName" : "",
-          "required" : "true",
-          "type" : "string_array",
-          "separator" : "\n",
-          "default" : [
-            "-server",
-            "-Xmx16G",
-            "-XX:+UseConcMarkSweepGC",
-            "-XX:+ExplicitGCInvokesConcurrent",
-            "-XX:+AggressiveOpts",
-            "-XX:+HeapDumpOnOutOfMemoryError",
-            "-XX:OnOutOfMemoryError=kill -9 %p"
-          ]
-        }
-      ],
+      "parameters" : [ 
+		{
+			"name" : "worker_webui_port",
+			"label" : "Worker Port",
+			"description" : "Worker节点监听端口",
+			"configName" : "http-server.http.port",
+			"required" : "true",
+			"type" : "port",
+			"default" : 8082
+		}
+	  ],
       "configWriter" : {
         "generators" : [
 		  {
             "filename" : "etc/jvm.config",
             "configFormat" : "gflags",
-			"includedParams" : ["jvm_config"],
+			"includedParams" : [],
 			"excludedParams" : []
           },
           {
             "filename" : "etc/worker.config.properties",
             "configFormat" : "properties",
-            "includedParams" : ["discovery_uri", "worker_webui_port"],
-            "excludedParams" : ["jvm_config"],
+            "includedParams" : ["discovery_uri","worker_webui_port"],
+            "excludedParams" : [],
             "additionalConfigs" : [
-              {
-                "key" : "coordinator",
-                "value" : "false"
-              }
+			  { "key" : "task.max-memory", "value" : "1GB" },
+              { "key" : "coordinator", "value" : "false" }
             ]
           },
           {
             "filename" : "etc/catalog/hive.properties",
             "configFormat" : "properties",
-            "includedParams" : ["hive_metastore_uri"],
-            "excludedParams" : ["jvm_config"],
-            "additionalConfigs" : [
-              {
-                "key" : "connector.name",
-                "value" : "hive-hadoop2"
-              },
-              {
-                "key" : "hive.config.resources",
-                "value" : "/etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml"
-              }
-            ]
+            "includedParams" : [],
+            "excludedParams" : []
           },
           {
             "filename" : "etc/catalog/kafka.properties",
             "configFormat" : "properties",
-            "includedParams" : ["kafka_nodes", "kafka_table_names"],
-            "excludedParams" : ["jvm_config"],
-            "additionalConfigs" : [
-              {
-                "key" : "connector.name",
-                "value" : "kafka"
-              },
-              {
-                "key" : "kafka.hide-internal-columns",
-                "value" : "false"
-              }
-            ]
+            "includedParams" : [],
+            "excludedParams" : []
           },
           {
             "filename" : "etc/catalog/mysql.properties",
             "configFormat" : "properties",
-            "includedParams" : ["mysql_connection_user", "mysql_connection_password"],
-            "excludedParams" : ["jvm_config", "mysql_connection_host", "mysql_connection_port"],
-            "additionalConfigs" : [
-              {
-                "key" : "connector.name",
-                "value" : "mysql"
-              },
-              {
-                "key" : "connection-url",
-                "value" : "jdbc:mysql://${mysql_connection_host}:${mysql_connection_port}"
-              }
-            ]
+            "includedParams" : [],
+            "excludedParams" : []
           }
         ]
       }
@@ -468,124 +274,55 @@
       ],
       "externalLink" : {
        "name" : "discovery_web_ui",
-       "label" : "Discovery管理界面地址",
+       "label" : "Discovery Web UI",
        "url" : "http://${host}:${discovery_webui_port}"
       },
       "topology" : { "minInstances" : 1, "maxInstances" : 1 },
       "parameters" : [
-        {
-          "name" : "discovery_webui_port",
-          "label" : "Discovery Port",
-          "description" : "Discovery服务监听端口",
-          "configName" : "http-server.http.port",
-          "required" : "true",
-          "type" : "port",
-          "default" : 8081
-        },
-        {
-          "name" : "task_max_memory",
-          "label" : "task",
-          "description" : "最大使用内存",
-          "configName" : "task.max-memory",
-          "required" : "true",
-          "type" : "memory",
-          "unit" : "bytes",
-          "default" : 1073741824
-        },
-        {
-          "name" : "jvm_config",
-          "label" : "jvm_config",
-          "description" : "jvm_config",
-          "configName" : "",
-          "required" : "true",
-          "type" : "string_array",
-          "separator" : "\n",
-          "default" : [
-            "-server",
-            "-Xmx16G",
-            "-XX:+UseConcMarkSweepGC",
-            "-XX:+ExplicitGCInvokesConcurrent",
-            "-XX:+AggressiveOpts",
-            "-XX:+HeapDumpOnOutOfMemoryError",
-            "-XX:OnOutOfMemoryError=kill -9 %p"
-          ]
-        }
-      ],
+		{
+			"name" : "discovery_webui_port",
+			"label" : "Discovery Port",
+			"description" : "Discovery服务监听端口",
+			"configName" : "http-server.http.port",
+			"required" : "true",
+			"type" : "port",
+			"default" : 8081
+		}
+	  ],
       "configWriter" : {
         "generators" : [
-		  {
-            "filename" : "etc/jvm.config",
-            "configFormat" : "gflags",
-			"includedParams" : ["jvm_config"],
-			"excludedParams" : []
-          },
           {
             "filename" : "etc/discovery.config.properties",
             "configFormat" : "properties",
             "includedParams" : ["discovery_uri", "discovery_webui_port"],
-            "excludedParams" : ["jvm_config"],
-            "additionalConfigs" : [
-              {
-                "key" : "coordinator",
-                "value" : "false"
-              },
-              {
-                "key" : "discovery-server.enabled",
-                "value" : "true"
-              },
-              {
-                "key" : "node-scheduler.include-coordinator",
-                "value" : "false"
-              }
+            "excludedParams" : [],
+			"additionalConfigs" : [
+			  { "key" : "task.max-memory", "value" : "1GB" }
             ]
+          },
+		  {
+            "filename" : "etc/jvm.config",
+            "configFormat" : "gflags",
+			"includedParams" : [],
+			"excludedParams" : []
           },
           {
             "filename" : "etc/catalog/hive.properties",
             "configFormat" : "properties",
-            "includedParams" : ["hive_metastore_uri"],
-            "excludedParams" : ["jvm_config"],
-            "additionalConfigs" : [
-              {
-                "key" : "connector.name",
-                "value" : "hive-hadoop2"
-              },
-              {
-                "key" : "hive.config.resources",
-                "value" : "/etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml"
-              }
-            ]
+            "includedParams" : [],
+            "excludedParams" : []
           },
           {
             "filename" : "etc/catalog/kafka.properties",
             "configFormat" : "properties",
-            "includedParams" : ["kafka_nodes", "kafka_table_names"],
-            "excludedParams" : ["jvm_config"],
-            "additionalConfigs" : [
-              {
-                "key" : "connector.name",
-                "value" : "kafka"
-              },
-              {
-                "key" : "kafka.hide-internal-columns",
-                "value" : "false"
-              }
-            ]
+            "includedParams" : [],
+            "excludedParams" : []
           },
           {
             "filename" : "etc/catalog/mysql.properties",
             "configFormat" : "properties",
-            "includedParams" : ["mysql_connection_user", "mysql_connection_password"],
-            "excludedParams" : ["jvm_config", "mysql_connection_host", "mysql_connection_port"],
-            "additionalConfigs" : [
-              {
-                "key" : "connector.name",
-                "value" : "mysql"
-              },
-              {
-                "key" : "connection-url",
-                "value" : "jdbc:mysql://${mysql_connection_host}:${mysql_connection_port}"
-              }
-            ]
+            "includedParams" : [],
+            "excludedParams" : []
           }
         ]
       }
