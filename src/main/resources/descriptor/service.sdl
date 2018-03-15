@@ -108,7 +108,26 @@
 			"required" : "true",
 			"type" : "port",
 			"default" : 8080
-		}
+		},
+		{
+          "name" : "coordinator_jvm_config",
+          "label" : "coordinator_jvm_config",
+          "description" : "Coordinator jvm config",
+		  "configName" : "",
+          "required" : "true",
+          "type" : "string_array",
+          "separator" : "\n",
+          "default" : [
+            "-server",
+			"-Xmx16G",
+			"-XX:+UseG1GC",
+			"-XX:G1HeapRegionSize=32M",
+			"-XX:+UseGCOverheadLimit",
+			"-XX:+ExplicitGCInvokesConcurrent",
+			"-XX:+HeapDumpOnOutOfMemoryError",
+			"-XX:+ExitOnOutOfMemoryError"
+          ]
+        }
 	  ],
       "configWriter" : {
         "generators" : [
@@ -127,8 +146,8 @@
 		  {
             "filename" : "etc/jvm.config",
 			"refreshable" : true,
-            "configFormat" : "gflags",
-			"includedParams" : [],
+			"configFormat":"gflags",
+			"includedParams" : ["coordinator_jvm_config"],
 			"excludedParams" : []
           },
           {
@@ -201,14 +220,33 @@
 			"required" : "true",
 			"type" : "port",
 			"default" : 8082
-		}
+		},
+		{
+          "name" : "worker_jvm_config",
+          "label" : "worker_jvm_config",
+          "description" : "Worker jvm config",
+		  "configName" : "",
+          "required" : "true",
+          "type" : "string_array",
+          "separator" : "\n",
+          "default" : [
+            "-server",
+			"-Xmx16G",
+			"-XX:+UseG1GC",
+			"-XX:G1HeapRegionSize=32M",
+			"-XX:+UseGCOverheadLimit",
+			"-XX:+ExplicitGCInvokesConcurrent",
+			"-XX:+HeapDumpOnOutOfMemoryError",
+			"-XX:+ExitOnOutOfMemoryError"
+          ]
+        }
 	  ],
       "configWriter" : {
         "generators" : [
 		  {
             "filename" : "etc/jvm.config",
             "configFormat" : "gflags",
-			"includedParams" : [],
+			"includedParams" : ["worker_jvm_config"],
 			"excludedParams" : []
           },
           {
@@ -287,7 +325,26 @@
 			"required" : "true",
 			"type" : "port",
 			"default" : 8081
-		}
+		},
+		{
+          "name" : "discovery_jvm_config",
+          "label" : "discovery_jvm_config",
+          "description" : "Discovery jvm config",
+		  "configName" : "",
+          "required" : "true",
+          "type" : "string_array",
+          "separator" : "\n",
+          "default" : [
+            "-server",
+			"-Xmx16G",
+			"-XX:+UseG1GC",
+			"-XX:G1HeapRegionSize=32M",
+			"-XX:+UseGCOverheadLimit",
+			"-XX:+ExplicitGCInvokesConcurrent",
+			"-XX:+HeapDumpOnOutOfMemoryError",
+			"-XX:+ExitOnOutOfMemoryError"
+          ]
+        }
 	  ],
       "configWriter" : {
         "generators" : [
@@ -304,7 +361,7 @@
 		  {
             "filename" : "etc/jvm.config",
             "configFormat" : "gflags",
-			"includedParams" : [],
+			"includedParams" : ["discovery_jvm_config"],
 			"excludedParams" : []
           },
           {
