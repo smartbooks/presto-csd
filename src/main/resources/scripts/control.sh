@@ -3,14 +3,17 @@
 # Time marker for both stderr and stdout
 date 1>&2
 
-DEFAULT_PRESTO_HOME=/var/lib/presto
+CMD=$1
+CMD_ROLE=$2
+CMD_CONF=$3
+
+DEFAULT_PRESTO_HOME_PREFIX=/var/lib/presto
+DEFAULT_PRESTO_HOME=$DEFAULT_PRESTO_HOME_PREFIX/$CMD_ROLE
 NODE_PROPERTIES_PATH=$DEFAULT_PRESTO_HOME/node.properties
 JVM_DUMMY_CONFIG_PATH=$CONF_DIR/jvm.dummy.config
 JVM_CONFIG_PATH=$CONF_DIR/etc/jvm.config
 export JAVA_HOME=$CDH_PRESTO_JAVA_HOME
 HIVE_CONF_PATH=$CONF_DIR/hive-conf
-
-CMD=$1
 
 function log {
   timestamp=$(date)
@@ -56,42 +59,75 @@ ARGS=()
 case $CMD in
 
   (start_corrdinator)
-    log "启动 Presto Coordinator"
+    log "Start Presto Coordinator"
     link_files
     generate_jvm_config
     copy_hdfs_config
     ARGS=("--config")
-    ARGS+=("$CONF_DIR/$2")
+    ARGS+=("$CONF_DIR/$CMD_CONF")
     ARGS+=("--data-dir")
     ARGS+=("$DEFAULT_PRESTO_HOME")
     ARGS+=("run")
+    ;;
+
+  (stop_corrdinator)
+    log "Stop Presto Coordinator"
+    link_files
+    generate_jvm_config
+    copy_hdfs_config
+    ARGS=("--config")
+    ARGS+=("$CONF_DIR/$CMD_CONF")
+    ARGS+=("--data-dir")
+    ARGS+=("$DEFAULT_PRESTO_HOME")
+    ARGS+=("stop")
     ;;
 
   (start_discovery)
-    log "启动 Presto Discovery"
+    log "Start Presto Discovery"
     link_files
     generate_jvm_config
     copy_hdfs_config
     ARGS=("--config")
-    ARGS+=("$CONF_DIR/$2")
+    ARGS+=("$CONF_DIR/$CMD_CONF")
     ARGS+=("--data-dir")
     ARGS+=("$DEFAULT_PRESTO_HOME")
     ARGS+=("run")
+    ;;
+   
+  (stop_discovery)
+    log "Stop Presto Discovery"
+    ARGS=("--config")
+    ARGS+=("$CONF_DIR/$CMD_CONF")
+    ARGS+=("--data-dir")
+    ARGS+=("$DEFAULT_PRESTO_HOME")
+    ARGS+=("stop")
     ;;
 
   (start_worker)
-    log "启动 Presto Worker"
+    log "Start Presto Worker"
     link_files
     generate_jvm_config
     copy_hdfs_config
     ARGS=("--config")
-    ARGS+=("$CONF_DIR/$2")
+    ARGS+=("$CONF_DIR/$CMD_CONF")
     ARGS+=("--data-dir")
     ARGS+=("$DEFAULT_PRESTO_HOME")
     ARGS+=("run")
     ;;
+  
+  (stop_worker)
+    log "Stop Presto Worker"
+    ARGS=("--config")
+    ARGS+=("$CONF_DIR/$CMD_CONF")
+    ARGS+=("--data-dir")
+    ARGS+=("$DEFAULT_PRESTO_HOME")
+    ARGS+=("stop")
+    ;;
 
   (init_node_properties)
+    mkdir $DEFAULT_PRESTO_HOME_PREFIX
+	rm -rf $DEFAULT_PRESTO_HOME
+    mkdir $DEFAULT_PRESTO_HOME
     if [ ! -f "$NODE_PROPERTIES_PATH" ]; then
       echo "node.environment=production" > $NODE_PROPERTIES_PATH
       echo "node.data-dir=/var/lib/presto" >> $NODE_PROPERTIES_PATH
@@ -101,7 +137,6 @@ case $CMD in
       log "$NODE_PROPERTIES_PATH is already created"
     fi
     exit 0
-
     ;;
 
   (*)

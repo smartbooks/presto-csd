@@ -25,24 +25,24 @@
   "commands" : [
     {
       "name" : "PrestoInitializeCoordinatorNodePropertiesCommand",
-      "label" : "初始化 Coordinator node.properties",
-      "description" : "初始化 Coordinator node.properties",
+      "label" : "Init Coordinator node.properties",
+      "description" : "Init Coordinator node.properties",
       "roleName" : "PRESTO_COORDINATOR",
       "roleCommand" : "coord_init",
       "runMode" : "all"
     },
     {
       "name" : "PrestoInitializeDiscoveryNodePropertiesCommand",
-      "label" : "初始化 Discovery node.properties",
-      "description" : "初始化 Discovery node.properties",
+      "label" : "Init Discovery node.properties",
+      "description" : "Init Discovery node.properties",
       "roleName" : "PRESTO_DISCOVERY",
       "roleCommand" : "discovery_init",
       "runMode" : "all"
     },
     {
       "name" : "PrestoInitializeWorkerNodePropertiesCommand",
-      "label" : "初始化 Worker node.properties",
-      "description" : "初始化 Worker node.properties",
+      "label" : "Init Worker node.properties",
+      "description" : "Init Worker node.properties",
       "roleName" : "PRESTO_WORKER",
       "roleCommand" : "worker_init",
       "runMode" : "all"
@@ -143,13 +143,17 @@
       "pluralLabel" : "Coordinators",
       "startRunner" : {
         "program" : "scripts/control.sh",
-        "args" : [
-          "start_corrdinator",
-          "etc/coordinator.config.properties"
-        ],
-        "environmentVariables" : {
-        }
+        "args" : ["start_corrdinator","coordinator","etc/coordinator.config.properties"],
+        "environmentVariables" : {}
       },
+	  "stopRunner":{
+		"timeout" : "90000",
+		"runner" : {
+		  "program" : "scripts/control.sh",
+		  "args" : ["stop_corrdinator","coordinator","etc/coordinator.config.properties"],
+		  "environmentVariables":{}
+		}
+	  },
       "commands" : [
         {
           "name" : "coord_init",
@@ -159,9 +163,8 @@
           "requiredRoleState" : "stopped",
           "commandRunner" : {
             "program" : "scripts/control.sh",
-            "args" : ["init_node_properties"],
-            "environmentVariables" : {
-            }
+            "args" : ["init_node_properties","coordinator"],
+            "environmentVariables" : {}
           }
         }
       ],
@@ -195,7 +198,7 @@
           "name" : "jvm_config",
           "label" : "jvm_config",
           "description" : "JVM配置包含一系列在启动JVM的时候需要使用的命令行选项.",
-          "configName" : "jvm.config",
+		  "configName" : "",
           "required" : "true",
           "type" : "string_array",
           "separator" : "\n",
@@ -212,6 +215,12 @@
       ],
       "configWriter" : {
         "generators" : [
+		  {
+            "filename" : "etc/jvm.config",
+            "configFormat" : "gflags",
+			"includedParams" : ["jvm_config"],
+			"excludedParams" : []
+          },
           {
             "filename" : "etc/coordinator.config.properties",
             "configFormat" : "properties",
@@ -273,31 +282,8 @@
               {
                 "key" : "connection-url",
                 "value" : "jdbc:mysql://${mysql_connection_host}:${mysql_connection_port}"
-              },
-              {
-                "key" : "connection-user",
-                "value" : "${mysql_connection_user}"
-              },
-              {
-                "key" : "connection-password",
-                "value" : "${mysql_connection_password}"
               }
             ]
-          },
-          {
-            "filename" : "etc/catalog/jmx.properties",
-            "configFormat" : "properties",
-            "additionalConfigs" : [
-              {
-                "key" : "connector.name",
-                "value" : "jmx"
-              }
-            ]
-          },
-          {
-            "filename" : "jvm.dummy.config",
-            "configFormat" : "properties",
-            "includedParams" : ["jvm_config"]
           }
         ]
       }
@@ -308,25 +294,28 @@
       "pluralLabel" : "Workers",
       "startRunner" : {
         "program" : "scripts/control.sh",
-        "args" : [
-          "start_worker",
-          "etc/worker.config.properties"
-        ],
-        "environmentVariables" : {
-        }
+        "args" : ["start_worker","worker","etc/worker.config.properties"],
+        "environmentVariables" : { }
       },
+	  "stopRunner":{
+		"timeout" : "90000",
+		"runner" : {
+		  "program" : "scripts/control.sh",
+		  "args" : ["stop_worker","worker","etc/worker.config.properties"],
+		  "environmentVariables":{}
+		}
+	  },
       "commands" : [
         {
           "name" : "worker_init",
-          "label" : "初始化 Worker node.properties.",
-          "description" : "初始化 Worker node.properties.",
+          "label" : "Init Worker node.properties.",
+          "description" : "Init Worker node.properties.",
           "expectedExitCodes" : [0],
           "requiredRoleState" : "stopped",
           "commandRunner" : {
             "program" : "scripts/control.sh",
-            "args" : ["init_node_properties"],
-            "environmentVariables" : {
-            }
+            "args" : ["init_node_properties","worker"],
+            "environmentVariables" : { }
           }
         }
       ],
@@ -360,7 +349,7 @@
           "name" : "jvm_config",
           "label" : "jvm_config",
           "description" : "JVM配置文件,包含一系列在启动JVM的时候需要使用的命令行选项",
-          "configName" : "jvm.config",
+          "configName" : "",
           "required" : "true",
           "type" : "string_array",
           "separator" : "\n",
@@ -377,6 +366,12 @@
       ],
       "configWriter" : {
         "generators" : [
+		  {
+            "filename" : "etc/jvm.config",
+            "configFormat" : "gflags",
+			"includedParams" : ["jvm_config"],
+			"excludedParams" : []
+          },
           {
             "filename" : "etc/worker.config.properties",
             "configFormat" : "properties",
@@ -434,31 +429,8 @@
               {
                 "key" : "connection-url",
                 "value" : "jdbc:mysql://${mysql_connection_host}:${mysql_connection_port}"
-              },
-              {
-                "key" : "connection-user",
-                "value" : "${mysql_connection_user}"
-              },
-              {
-                "key" : "connection-password",
-                "value" : "${mysql_connection_password}"
               }
             ]
-          },
-          {
-            "filename" : "etc/catalog/jmx.properties",
-            "configFormat" : "properties",
-            "additionalConfigs" : [
-              {
-                "key" : "connector.name",
-                "value" : "jmx"
-              }
-            ]
-          },
-          {
-            "filename" : "jvm.dummy.config",
-            "configFormat" : "properties",
-            "includedParams" : ["jvm_config"]
           }
         ]
       }
@@ -469,13 +441,17 @@
       "pluralLabel" : "Discoverys",
       "startRunner" : {
         "program" : "scripts/control.sh",
-        "args" : [
-          "start_discovery",
-          "etc/discovery.config.properties"
-        ],
-        "environmentVariables" : {
-        }
+        "args" : ["start_discovery","discovery","etc/discovery.config.properties"],
+        "environmentVariables" : { }
       },
+	  "stopRunner":{
+		"timeout" : "90000",
+		"runner" : {
+		  "program" : "scripts/control.sh",
+		  "args" : ["stop_discovery","discovery","etc/discovery.config.properties"],
+		  "environmentVariables":{}
+		}
+	  },
       "commands" : [
         {
           "name" : "discovery_init",
@@ -485,9 +461,8 @@
           "requiredRoleState" : "stopped",
           "commandRunner" : {
             "program" : "scripts/control.sh",
-            "args" : ["init_node_properties"],
-            "environmentVariables" : {
-            }
+            "args" : ["init_node_properties","discovery"],
+            "environmentVariables" : { }
           }
         }
       ],
@@ -521,7 +496,7 @@
           "name" : "jvm_config",
           "label" : "jvm_config",
           "description" : "jvm_config",
-          "configName" : "jvm.config",
+          "configName" : "",
           "required" : "true",
           "type" : "string_array",
           "separator" : "\n",
@@ -538,6 +513,12 @@
       ],
       "configWriter" : {
         "generators" : [
+		  {
+            "filename" : "etc/jvm.config",
+            "configFormat" : "gflags",
+			"includedParams" : ["jvm_config"],
+			"excludedParams" : []
+          },
           {
             "filename" : "etc/discovery.config.properties",
             "configFormat" : "properties",
@@ -603,32 +584,8 @@
               {
                 "key" : "connection-url",
                 "value" : "jdbc:mysql://${mysql_connection_host}:${mysql_connection_port}"
-              },
-              {
-                "key" : "connection-user",
-                "value" : "${mysql_connection_user}"
-              },
-              {
-                "key" : "connection-password",
-                "value" : "${mysql_connection_password}"
               }
             ]
-          },
-          {
-            "filename" : "etc/catalog/jmx.properties",
-            "configFormat" : "properties",
-            "excludedParams" : ["jvm_config"],
-            "additionalConfigs" : [
-              {
-                "key" : "connector.name",
-                "value" : "jmx"
-              }
-            ]
-          },
-          {
-            "filename" : "jvm.dummy.config",
-            "configFormat" : "properties",
-            "includedParams" : ["jvm_config"]
           }
         ]
       }
