@@ -173,7 +173,7 @@
        "label" : "Coordinator管理界面地址",
        "url" : "http://${host}:${coordinator_webui_port}"
       },
-      "topology" : { "minInstances" : 1 },
+      "topology" : { "minInstances" : 1, "maxInstances" : 1},
       "parameters" : [
         {
           "name" : "coordinator_webui_port",

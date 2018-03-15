@@ -79,7 +79,7 @@ case $CMD in
     ARGS+=("$CONF_DIR/$CMD_CONF")
     ARGS+=("--data-dir")
     ARGS+=("$DEFAULT_PRESTO_HOME")
-    ARGS+=("stop")
+    ARGS+=("kill")
     ;;
 
   (start_discovery)
@@ -100,7 +100,7 @@ case $CMD in
     ARGS+=("$CONF_DIR/$CMD_CONF")
     ARGS+=("--data-dir")
     ARGS+=("$DEFAULT_PRESTO_HOME")
-    ARGS+=("stop")
+    ARGS+=("kill")
     ;;
 
   (start_worker)
@@ -121,7 +121,7 @@ case $CMD in
     ARGS+=("$CONF_DIR/$CMD_CONF")
     ARGS+=("--data-dir")
     ARGS+=("$DEFAULT_PRESTO_HOME")
-    ARGS+=("stop")
+    ARGS+=("kill")
     ;;
 
   (init_node_properties)
