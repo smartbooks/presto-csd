@@ -146,7 +146,7 @@
 		  {
             "filename" : "etc/jvm.config",
 			"refreshable" : true,
-			"configFormat":"gflags",
+			"configFormat":"properties",
 			"includedParams" : ["coordinator_jvm_config"],
 			"excludedParams" : []
           },
