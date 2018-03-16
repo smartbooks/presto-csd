@@ -7,7 +7,7 @@ CMD=$1
 CMD_ROLE=$2
 CMD_CONF=$3
 
-DEFAULT_PRESTO_HOME_PREFIX=/var/lib/presto
+DEFAULT_PRESTO_HOME_PREFIX=/data/presto-data
 DEFAULT_PRESTO_HOME=$DEFAULT_PRESTO_HOME_PREFIX/$CMD_ROLE
 NODE_PROPERTIES_PATH=$DEFAULT_PRESTO_HOME/node.properties
 JVM_DUMMY_CONFIG_PATH=$CONF_DIR/etc/jvm.dummy.config
@@ -35,6 +35,8 @@ function copy_hdfs_config {
 }
 
 function link_files {
+
+  log "link_files $CDH_PRESTO_HOME $CONF_DIR $PRESTO_LIB $PRESTO_PLUGIN"
   cp -r $CDH_PRESTO_HOME/bin $CONF_DIR
 
   PRESTO_LIB=$CONF_DIR/lib
@@ -138,7 +140,7 @@ case $CMD in
     mkdir $DEFAULT_PRESTO_HOME
     if [ ! -f "$NODE_PROPERTIES_PATH" ]; then
       echo "node.environment=production" > $NODE_PROPERTIES_PATH
-      echo "node.data-dir=/var/lib/presto" >> $NODE_PROPERTIES_PATH
+      echo "node.data-dir=$DEFAULT_PRESTO_HOME" >> $NODE_PROPERTIES_PATH
       echo "node.id=`uuidgen`" >> $NODE_PROPERTIES_PATH
       log "create $NODE_PROPERTIES_PATH successfly"
     else
