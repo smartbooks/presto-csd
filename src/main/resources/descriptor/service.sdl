@@ -113,7 +113,7 @@
           "name" : "coordinator_jvm_config",
           "label" : "coordinator_jvm_config",
           "description" : "Coordinator jvm config",
-		  "configName" : "",
+		  "configName" : "jvm.config",
           "required" : "true",
           "type" : "string_array",
           "separator" : "\n",
@@ -144,7 +144,7 @@
             ]
           },
 		  {
-            "filename" : "etc/jvm.config",
+            "filename" : "etc/jvm.dummy.config",
 			"refreshable" : true,
 			"configFormat":"properties",
 			"includedParams" : ["coordinator_jvm_config"],
@@ -225,7 +225,7 @@
           "name" : "worker_jvm_config",
           "label" : "worker_jvm_config",
           "description" : "Worker jvm config",
-		  "configName" : "",
+		  "configName" : "jvm.config",
           "required" : "true",
           "type" : "string_array",
           "separator" : "\n",
@@ -244,8 +244,8 @@
       "configWriter" : {
         "generators" : [
 		  {
-            "filename" : "etc/jvm.config",
-            "configFormat" : "gflags",
+            "filename" : "etc/jvm.dummy.config",
+            "configFormat" : "properties",
 			"includedParams" : ["worker_jvm_config"],
 			"excludedParams" : []
           },
@@ -330,7 +330,7 @@
           "name" : "discovery_jvm_config",
           "label" : "discovery_jvm_config",
           "description" : "Discovery jvm config",
-		  "configName" : "",
+		  "configName" : "jvm.config",
           "required" : "true",
           "type" : "string_array",
           "separator" : "\n",
@@ -359,8 +359,8 @@
             ]
           },
 		  {
-            "filename" : "etc/jvm.config",
-            "configFormat" : "gflags",
+            "filename" : "etc/jvm.dummy.config",
+            "configFormat" : "properties",
 			"includedParams" : ["discovery_jvm_config"],
 			"excludedParams" : []
           },

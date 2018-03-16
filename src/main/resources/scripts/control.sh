@@ -10,7 +10,7 @@ CMD_CONF=$3
 DEFAULT_PRESTO_HOME_PREFIX=/var/lib/presto
 DEFAULT_PRESTO_HOME=$DEFAULT_PRESTO_HOME_PREFIX/$CMD_ROLE
 NODE_PROPERTIES_PATH=$DEFAULT_PRESTO_HOME/node.properties
-JVM_DUMMY_CONFIG_PATH=$CONF_DIR/jvm.dummy.config
+JVM_DUMMY_CONFIG_PATH=$CONF_DIR/etc/jvm.dummy.config
 JVM_CONFIG_PATH=$CONF_DIR/etc/jvm.config
 export JAVA_HOME=$CDH_PRESTO_JAVA_HOME
 HIVE_CONF_PATH=$CONF_DIR/hive-conf
@@ -22,8 +22,10 @@ function log {
 }
 
 function generate_jvm_config {
+  log "generate_jvm_config $JVM_DUMMY_CONFIG_PATH to $JVM_CONFIG_PATH"
   if [ -f $JVM_DUMMY_CONFIG_PATH ]; then
     cat $JVM_DUMMY_CONFIG_PATH | perl -e '$line = <STDIN>; chomp $line; $configs = substr($line, (length "jvm.config=")); for $value (split /\\n/, $configs) { print $value . "\n" }' > $JVM_CONFIG_PATH
+	log "success generate $JVM_CONFIG_PATH"
   fi
 }
 
