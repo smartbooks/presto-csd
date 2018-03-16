@@ -150,22 +150,127 @@
 			"includedParams" : ["coordinator_jvm_config"],
 			"excludedParams" : []
           },
-          {
+		  {
+            "filename" : "etc/catalog/accumulo.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },
+		  {
+            "filename" : "etc/catalog/blackhole.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },
+		  {
+            "filename" : "etc/catalog/cassandra.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },
+		  {
             "filename" : "etc/catalog/hive.properties",
 			"refreshable" : true,
             "configFormat" : "properties",
             "includedParams" : [],
 			"excludedParams" : []
           },
-          {
+		  {
+            "filename" : "etc/catalog/jmx.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },
+		  {
             "filename" : "etc/catalog/kafka.properties",
 			"refreshable" : true,
             "configFormat" : "properties",
             "includedParams" : [],
 			"excludedParams" : []
           },
-          {
+		  {
+            "filename" : "etc/catalog/localfile.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },
+		  {
+            "filename" : "etc/catalog/memory.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },
+		  {
+            "filename" : "etc/catalog/mongodb.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },
+		  {
             "filename" : "etc/catalog/mysql.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },
+		  {
+            "filename" : "etc/catalog/oracle.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },		  
+          {
+            "filename" : "etc/catalog/postgresql.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },
+          {
+            "filename" : "etc/catalog/redis.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },
+          {
+            "filename" : "etc/catalog/redshift.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+            "excludedParams" : []
+          },
+		  {
+            "filename" : "etc/catalog/sqlserver.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+            "excludedParams" : []
+          },
+		  {
+            "filename" : "etc/catalog/thrift.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+            "excludedParams" : []
+          },
+		  {
+            "filename" : "etc/catalog/tpcds.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+            "excludedParams" : []
+          },
+		  {
+            "filename" : "etc/catalog/tpch.properties",
 			"refreshable" : true,
             "configFormat" : "properties",
             "includedParams" : [],
@@ -259,19 +364,127 @@
             ]
           },
           {
+            "filename" : "etc/catalog/accumulo.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },
+		  {
+            "filename" : "etc/catalog/blackhole.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },
+		  {
+            "filename" : "etc/catalog/cassandra.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },
+		  {
             "filename" : "etc/catalog/hive.properties",
+			"refreshable" : true,
             "configFormat" : "properties",
             "includedParams" : [],
-            "excludedParams" : []
+			"excludedParams" : []
           },
-          {
+		  {
+            "filename" : "etc/catalog/jmx.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },
+		  {
             "filename" : "etc/catalog/kafka.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },
+		  {
+            "filename" : "etc/catalog/localfile.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },
+		  {
+            "filename" : "etc/catalog/memory.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },
+		  {
+            "filename" : "etc/catalog/mongodb.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },
+		  {
+            "filename" : "etc/catalog/mysql.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },
+		  {
+            "filename" : "etc/catalog/oracle.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },		  
+          {
+            "filename" : "etc/catalog/postgresql.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },
+          {
+            "filename" : "etc/catalog/redis.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },
+          {
+            "filename" : "etc/catalog/redshift.properties",
+			"refreshable" : true,
             "configFormat" : "properties",
             "includedParams" : [],
             "excludedParams" : []
           },
-          {
-            "filename" : "etc/catalog/mysql.properties",
+		  {
+            "filename" : "etc/catalog/sqlserver.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+            "excludedParams" : []
+          },
+		  {
+            "filename" : "etc/catalog/thrift.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+            "excludedParams" : []
+          },
+		  {
+            "filename" : "etc/catalog/tpcds.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+            "excludedParams" : []
+          },
+		  {
+            "filename" : "etc/catalog/tpch.properties",
+			"refreshable" : true,
             "configFormat" : "properties",
             "includedParams" : [],
             "excludedParams" : []
@@ -365,19 +578,127 @@
 			"excludedParams" : []
           },
           {
+            "filename" : "etc/catalog/accumulo.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },
+		  {
+            "filename" : "etc/catalog/blackhole.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },
+		  {
+            "filename" : "etc/catalog/cassandra.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },
+		  {
             "filename" : "etc/catalog/hive.properties",
+			"refreshable" : true,
             "configFormat" : "properties",
             "includedParams" : [],
-            "excludedParams" : []
+			"excludedParams" : []
           },
-          {
+		  {
+            "filename" : "etc/catalog/jmx.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },
+		  {
             "filename" : "etc/catalog/kafka.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },
+		  {
+            "filename" : "etc/catalog/localfile.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },
+		  {
+            "filename" : "etc/catalog/memory.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },
+		  {
+            "filename" : "etc/catalog/mongodb.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },
+		  {
+            "filename" : "etc/catalog/mysql.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },
+		  {
+            "filename" : "etc/catalog/oracle.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },		  
+          {
+            "filename" : "etc/catalog/postgresql.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },
+          {
+            "filename" : "etc/catalog/redis.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+			"excludedParams" : []
+          },
+          {
+            "filename" : "etc/catalog/redshift.properties",
+			"refreshable" : true,
             "configFormat" : "properties",
             "includedParams" : [],
             "excludedParams" : []
           },
-          {
-            "filename" : "etc/catalog/mysql.properties",
+		  {
+            "filename" : "etc/catalog/sqlserver.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+            "excludedParams" : []
+          },
+		  {
+            "filename" : "etc/catalog/thrift.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+            "excludedParams" : []
+          },
+		  {
+            "filename" : "etc/catalog/tpcds.properties",
+			"refreshable" : true,
+            "configFormat" : "properties",
+            "includedParams" : [],
+            "excludedParams" : []
+          },
+		  {
+            "filename" : "etc/catalog/tpch.properties",
+			"refreshable" : true,
             "configFormat" : "properties",
             "includedParams" : [],
             "excludedParams" : []
